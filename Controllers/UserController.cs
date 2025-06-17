@@ -20,7 +20,7 @@ namespace final_project.Controllers
 
         [HttpGet]
         [Route("{email}")]
-        public ActionResult<User> getUserByEmail(string email)
+        public ActionResult<User> GetUserByEmail(string email)
         {
             var user = _userRepository.GetUserByEmail(email);
             if (user == null)
