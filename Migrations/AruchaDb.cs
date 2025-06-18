@@ -23,7 +23,7 @@ public class AruchaDb : DbContext
         });
 
         modelBuilder.Entity<Recipe>(entity => {
-            entity.Property(e => e.idMeal).IsRequired();
+            entity.HasKey(e => e.idMeal);
             entity.Property(e => e.strMeal);
             entity.Property(e => e.strCategory);
             entity.Property(e => e.strArea);
