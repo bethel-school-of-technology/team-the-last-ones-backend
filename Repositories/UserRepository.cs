@@ -6,7 +6,7 @@ namespace final_project.Repositories;
 public class UserRepository : IUserRepository
 {
 
-    private static AruchaDb _context;
+    private readonly AruchaDb _context;
 
     public UserRepository(AruchaDb context)
     {
