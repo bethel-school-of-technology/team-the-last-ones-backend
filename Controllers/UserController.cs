@@ -38,6 +38,11 @@ namespace final_project.Controllers
             {
                 return BadRequest();
             }
+
+            if (_userRepository.GetUserByEmail(user.Email) != null) {
+                return BadRequest();
+            }
+
             _userRepository.CreateUser(user);
             return NoContent();
         }
