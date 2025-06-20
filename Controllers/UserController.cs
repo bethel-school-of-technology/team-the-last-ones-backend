@@ -18,6 +18,7 @@ namespace final_project.Controllers
             _userRepository = repository;
         }
 
+        // /api/User/:email
         [HttpGet]
         [Route("{email}")]
         public ActionResult<User> GetUserByEmail(string email)
@@ -30,6 +31,7 @@ namespace final_project.Controllers
             return Ok(user);
         }
 
+        // /api/User/register
         [HttpPost]
         [Route("register")]
         public ActionResult CreateUser(User user)
