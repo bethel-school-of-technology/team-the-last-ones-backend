@@ -15,4 +15,6 @@ public class User
 
     [Required]
     public string? Password { get; set; }
+
+    public List<Recipe> Recipes { get; set; } = new List<Recipe>();
 }
