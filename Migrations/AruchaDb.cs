@@ -18,6 +18,7 @@ public class AruchaDb : DbContext
         {
             entity.HasKey(e => e.UserId);
             entity.Property(e => e.Email).IsRequired();
+            entity.HasIndex(e => e.Email).IsUnique();
             entity.Property(e => e.Password).IsRequired();
             entity.Property(e => e.UserName).IsRequired();
         });
