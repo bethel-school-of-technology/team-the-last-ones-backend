@@ -1,1 +1,0 @@
-"Services" are designed to provide and manage data across the entire back-end.
