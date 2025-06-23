@@ -14,7 +14,7 @@ public class RecipeRepository: IRecipeRepository
 
     public Recipe? GetRecipeByUserId(int userId) 
     {
-        throw new NotImplementedException();
+        return _context.Recipes.SingleOrDefault(r => r.UserId == userId);
     }
 
     public Recipe CreateRecipe(Recipe recipe)
