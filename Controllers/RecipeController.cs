@@ -1,16 +1,36 @@
+using final_project.Models;
 using final_project.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Routing.Constraints;
 
 namespace final_project.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class RecipeController
+public class RecipeController: Controller
 {
     private readonly IRecipeRepository _recipeRepository;
 
     public RecipeController(IRecipeRepository repository)
     {
         _recipeRepository = repository;
+    }
+
+    [HttpPost]
+    public ActionResult CreateRecipe(Recipe recipe)
+    {
+        // throw new NotImplementedException();
+        if (recipe == null || !ModelState.IsValid)
+        {
+            return BadRequest();
+        }
+
+        if (_recipeRepository.GetRecipeByUserId(recipe.UserId) != null)
+        {
+            return BadRequest();
+        }
+
+        _recipeRepository.CreateRecipe(recipe);
+        return NoContent();
     }
 }
