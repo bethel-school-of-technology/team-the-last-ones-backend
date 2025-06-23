@@ -19,6 +19,9 @@ public class RecipeRepository: IRecipeRepository
 
     public Recipe CreateRecipe(Recipe recipe)
     {
-        throw new NotImplementedException();
+        // throw new NotImplementedException();
+        _context.Add(recipe);
+        _context.SaveChanges();
+        return recipe;
     }
 }
