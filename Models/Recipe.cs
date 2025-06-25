@@ -2,7 +2,7 @@ namespace final_project.Models;
 
 public class Recipe {
     public int UserId;
-    public int idMeal; 
+    public int recipeId; 
     public string strMeal = ""; 
     public string strCategory = ""; 
     public string strArea = ""; 
