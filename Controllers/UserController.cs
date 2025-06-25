@@ -41,14 +41,16 @@ namespace final_project.Controllers
                 return BadRequest();
             }
 
-            if (_userRepository.GetUserByEmail(user.Email) != null) {
-                return BadRequest();
+            if (
+                _userRepository.GetUserByEmail(user.Email) != null ||
+                _userRepository.GetUserByUserName(user.UserName) != null
+                )
+            {
+                return BadRequest("User already exists");
             }
 
             _userRepository.CreateUser(user);
             return NoContent();
         }
     }
-
-
 }
