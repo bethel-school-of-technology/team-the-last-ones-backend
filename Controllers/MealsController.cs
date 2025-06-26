@@ -30,11 +30,27 @@ namespace final_project.Controllers
             return NoContent();
         }
 
+        // /api/mealsUserId
         [HttpGet]
         [Route("{UserId}")]
         public ActionResult<IEnumerable<MealsPlan>> GetMealsByUserId(int userId)
         {
             return Ok(_mealsRepository.GetMealsByUserId(userId));
         }
+
+        // /api/meals/MealId
+        [HttpGet]
+        [Route("mealId{MealId}")]
+        public ActionResult<MealsPlan> GetMealById(int MealId)
+        {
+            var meal = _mealsRepository.GetMealsByUserId(MealId);
+            if (meal == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(meal);
+        }
+        
     }
 }

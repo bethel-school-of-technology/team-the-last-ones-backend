@@ -21,7 +21,13 @@ public class MealsRepository : IMealsRepository
 
     public IEnumerable<MealsPlan> GetMealsByUserId(int userId)
     {
-        return _context.Meals.Where(m => m.userId == userId);
+        return _context.Meals.Where(m => m.UserId == userId);
     }
+
+    public MealsPlan? GetMealById(int mealId)
+    {
+        return _context.Meals.SingleOrDefault(m => m.MealsPlanId == mealId);
+    }
+
     
 }
