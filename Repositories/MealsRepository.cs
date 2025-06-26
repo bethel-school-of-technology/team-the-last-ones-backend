@@ -18,4 +18,10 @@ public class MealsRepository : IMealsRepository
         _context.SaveChanges();
         return meal;
     }
+
+    public IEnumerable<MealsPlan> GetMealsByUserId(int userId)
+    {
+        return _context.Meals.Where(m => m.userId == userId);
+    }
+    
 }

@@ -18,7 +18,7 @@ namespace final_project.Controllers
         }
 
         // /api/meals/create
-        [HttpGet]
+        [HttpPost]
         [Route("create")]
         public ActionResult CreateMeals(MealsPlan meal)
         {
@@ -28,6 +28,13 @@ namespace final_project.Controllers
             }
             _mealsRepository.CreateMeals(meal);
             return NoContent();
+        }
+
+        [HttpGet]
+        [Route("{UserId}")]
+        public ActionResult<IEnumerable<MealsPlan>> GetMealsByUserId(int userId)
+        {
+            return Ok(_mealsRepository.GetMealsByUserId(userId));
         }
     }
 }

@@ -78,6 +78,7 @@ public class AruchaDb : DbContext
         modelBuilder.Entity<MealsPlan>(entity =>
         {
             entity.HasKey(e => e.MealsPlanId);
+            entity.Property(e => e.userId);
             entity.Property(e => e.TimeOfDay);
             entity.Property(e => e.Date);
             entity.Property(e => e.MealId);
