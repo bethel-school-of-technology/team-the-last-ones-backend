@@ -9,7 +9,7 @@ public class Recipe {
     public string strInstructions = ""; 
     public string strMealThumb = ""; 
     public string strTags = ""; 
-    public string strYoutube = ""; 
+    public string strYoutube = "";
     public string strIngredients1 = ""; 
     public string strIngredients2 = ""; 
     public string strIngredients3 = ""; 
@@ -29,7 +29,7 @@ public class Recipe {
     public string strIngredients17 = ""; 
     public string strIngredients18 = ""; 
     public string strIngredients19 = ""; 
-    public string strIngredients20 = ""; 
+    public string strIngredients20 = "";    
     public string strMeasure1 = ""; 
     public string strMeasure2 = ""; 
     public string strMeasure3 = ""; 
