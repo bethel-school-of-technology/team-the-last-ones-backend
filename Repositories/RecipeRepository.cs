@@ -91,9 +91,8 @@ public class RecipeRepository: IRecipeRepository
         }
     }
 
-    public Recipe GetRecipeById(int recipeId)
+    public IEnumerable<Recipe> GetRecipeById(int recipeId)
     {
-        return _context.Recipes.Single(r => r.recipeId == recipeId);
+        return _context.Recipes.Where(r => r.recipeId == recipeId);
     }
-
 }
