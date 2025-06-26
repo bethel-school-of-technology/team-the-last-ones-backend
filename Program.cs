@@ -1,5 +1,6 @@
 using final_project.Migrations;
 using final_project.Repositories;
+using final_project.Services;
 using Microsoft.AspNetCore.OpenApi;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -17,11 +18,8 @@ builder.Services.AddDbContext<AruchaDb>(options => {
     options.UseSqlite(connectionString);
 });
 
-// try {
-    builder.Services.AddScoped<IUserRepository, UserRepository>();
-// } catch {
-//     throw new Exception("Unable to register user repository");
-// }
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IAuthService, AuthService>();
 
 var app = builder.Build();
 
