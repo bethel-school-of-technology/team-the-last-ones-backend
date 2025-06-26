@@ -6,7 +6,15 @@ namespace final_project.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class mealsController : Controller
+    public class MealsController : Controller
     {
+        private readonly ILogger<MealsController> _logger;
+        private readonly IMealsRepository _mealsRepository;
+
+        public MealsController(ILogger<MealsController> logger, IMealsRepository repository)
+        {
+            _logger = logger;
+            _mealsRepository = repository;
+        }
     }
 }
