@@ -8,6 +8,8 @@ public class AruchaDb : DbContext
 
     public DbSet<User> Users { get; set; }
     public DbSet<Recipe> Recipes { get; set; }
+
+    public DbSet<MealsPlan> Meals { get; set; }
     public AruchaDb(DbContextOptions<AruchaDb> options) : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -71,6 +73,14 @@ public class AruchaDb : DbContext
             entity.Property(e => e.strMeasure18);
             entity.Property(e => e.strMeasure19);
             entity.Property(e => e.strMeasure20);
+        });
+
+        modelBuilder.Entity<MealsPlan>(entity =>
+        {
+            entity.HasKey(e => e.MealsPlanId);
+            entity.Property(e => e.TimeOfDay);
+            entity.Property(e => e.Date);
+            entity.Property(e => e.MealId);
         });
 
         modelBuilder.Entity<User>()
