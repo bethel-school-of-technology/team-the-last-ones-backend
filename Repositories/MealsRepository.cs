@@ -29,5 +29,16 @@ public class MealsRepository : IMealsRepository
         return _context.Meals.SingleOrDefault(m => m.MealsPlanId == mealId);
     }
 
-    
+    public MealsPlan? UpdateMeal(MealsPlan updateMeal)
+    {
+        var orMeal = _context.Meals.Find(updateMeal.MealsPlanId);
+        if (orMeal != null)
+        {
+            orMeal.MealId = updateMeal.MealId;
+            orMeal.Date = updateMeal.Date;
+            orMeal.TimeOfDay = updateMeal.TimeOfDay;
+            _context.SaveChanges();
+        }
+        return orMeal;
+    }
 }

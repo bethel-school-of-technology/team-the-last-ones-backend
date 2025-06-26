@@ -6,6 +6,6 @@ public interface IMealsRepository
 {
     MealsPlan CreateMeals(MealsPlan meal);
     IEnumerable<MealsPlan> GetMealsByUserId(int userId);
-
     MealsPlan? GetMealById(int mealId);
+    MealsPlan? UpdateMeal(MealsPlan updateMeal);
 }

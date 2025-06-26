@@ -1,6 +1,7 @@
 using final_project.Models;
 using final_project.Repositories;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace final_project.Controllers
 {
@@ -51,6 +52,17 @@ namespace final_project.Controllers
 
             return Ok(meal);
         }
-        
+
+        // /api/meals/update
+        [HttpPut]
+        [Route("update:int")]
+        public ActionResult<MealsPlan> UpdateMeal(MealsPlan meal)
+        {
+            if (!ModelState.IsValid || meal == null)
+            {
+                return BadRequest();
+            }
+            return Ok(_mealsRepository.UpdateMeal(meal));
+        }
     }
 }
