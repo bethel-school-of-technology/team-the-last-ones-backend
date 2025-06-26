@@ -8,4 +8,5 @@ public interface IMealsRepository
     IEnumerable<MealsPlan> GetMealsByUserId(int userId);
     MealsPlan? GetMealById(int mealId);
     MealsPlan? UpdateMeal(MealsPlan updateMeal);
+    void DeleteMealByMealPlanId(int mealPlanId);
 }

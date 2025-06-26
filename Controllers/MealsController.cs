@@ -64,5 +64,14 @@ namespace final_project.Controllers
             }
             return Ok(_mealsRepository.UpdateMeal(meal));
         }
+
+        // /api/meals/delete
+        [HttpDelete]
+        [Route("delete{mealsPlanId}")]
+        public ActionResult DeleteMeal(int mealPlanId)
+        {
+            _mealsRepository.DeleteMealByMealPlanId(mealPlanId);
+            return NoContent();
+        }
     }
 }

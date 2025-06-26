@@ -41,4 +41,14 @@ public class MealsRepository : IMealsRepository
         }
         return orMeal;
     }
+
+    public void DeleteMealByMealPlanId(int mealPlanId)
+    {
+        var meal = _context.Meals.Find(mealPlanId);
+        if (meal != null)
+        {
+            _context.Meals.Remove(meal);
+            _context.SaveChanges();
+        }
+    }
 }
