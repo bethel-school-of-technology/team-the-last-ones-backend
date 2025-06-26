@@ -11,5 +11,11 @@ public class MealsRepository : IMealsRepository
     {
         _context = context;
     }
-    
+
+    public MealsPlan CreateMeals(MealsPlan meal)
+    {
+        _context.Add(meal);
+        _context.SaveChanges();
+        return meal;
+    }
 }

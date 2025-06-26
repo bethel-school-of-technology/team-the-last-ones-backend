@@ -16,5 +16,18 @@ namespace final_project.Controllers
             _logger = logger;
             _mealsRepository = repository;
         }
+
+        // /api/meals/create
+        [HttpGet]
+        [Route("create")]
+        public ActionResult CreateMeals(MealsPlan meal)
+        {
+            if (meal == null || !ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+            _mealsRepository.CreateMeals(meal);
+            return NoContent();
+        }
     }
 }
