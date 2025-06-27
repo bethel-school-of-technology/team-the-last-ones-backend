@@ -26,7 +26,7 @@ public class RecipeRepository: IRecipeRepository
 
     public Recipe? UpdateRecipe(Recipe updateRecipe)
     {
-        var orRecipe = _context.Recipes.Find(updateRecipe.recipeId);
+        var orRecipe = _context.Recipes.Find(updateRecipe.RecipeId);
         if (orRecipe != null)
         {
             orRecipe.strCategory = updateRecipe.strCategory;
@@ -93,6 +93,6 @@ public class RecipeRepository: IRecipeRepository
 
     public IEnumerable<Recipe> GetRecipeById(int recipeId)
     {
-        return _context.Recipes.Where(r => r.recipeId == recipeId);
+        return _context.Recipes.Where(r => r.RecipeId == recipeId);
     }
 }

@@ -25,7 +25,7 @@ public class AruchaDb : DbContext
         });
 
         modelBuilder.Entity<Recipe>(entity => {
-            entity.HasKey(e => e.recipeId);
+            entity.HasKey(e => e.RecipeId);
             entity.Property(e => e.strMeal);
             entity.Property(e => e.strCategory);
             entity.Property(e => e.strArea);
@@ -86,6 +86,12 @@ public class AruchaDb : DbContext
 
         modelBuilder.Entity<User>()
             .HasMany(u => u.Recipes)
-            .WithOne(r => r.User);
+            .WithOne(r => r.User)
+            .HasForeignKey(r => r.UserId);
+
+        modelBuilder.Entity<User>()
+            .HasMany(m => m.MealPlans)
+            .WithOne(m => m.User)
+            .HasForeignKey(m => m.UserId);
     }
 }

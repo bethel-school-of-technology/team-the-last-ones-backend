@@ -1,8 +1,9 @@
 namespace final_project.Models;
 
 public class Recipe {
-    public int UserId;
-    public int recipeId; 
+    public int UserId { get; set; }
+    public User? User { get; set; }
+    public int RecipeId { get; set; }
     public string strMeal = ""; 
     public string strCategory = ""; 
     public string strArea = ""; 
