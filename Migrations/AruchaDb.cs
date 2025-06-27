@@ -25,7 +25,7 @@ public class AruchaDb : DbContext
         });
 
         modelBuilder.Entity<Recipe>(entity => {
-            entity.HasKey(e => e.idMeal);
+            entity.HasKey(e => e.recipeId);
             entity.Property(e => e.strMeal);
             entity.Property(e => e.strCategory);
             entity.Property(e => e.strArea);
