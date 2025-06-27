@@ -11,8 +11,8 @@ using final_project.Migrations;
 namespace backend_.net.Migrations
 {
     [DbContext(typeof(AruchaDb))]
-    [Migration("20250618221753_AddRecipes")]
-    partial class AddRecipes
+    [Migration("20250627021808_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -20,13 +20,39 @@ namespace backend_.net.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.0");
 
-            modelBuilder.Entity("final_project.Models.Recipe", b =>
+            modelBuilder.Entity("final_project.Models.MealsPlan", b =>
                 {
-                    b.Property<int>("idMeal")
+                    b.Property<int>("MealsPlanId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("UserId")
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("MealId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("TimeOfDay")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("MealsPlanId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Meals");
+                });
+
+            modelBuilder.Entity("final_project.Models.Recipe", b =>
+                {
+                    b.Property<int>("RecipeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("UserId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("strArea")
@@ -217,7 +243,7 @@ namespace backend_.net.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.HasKey("idMeal");
+                    b.HasKey("RecipeId");
 
                     b.HasIndex("UserId");
 
@@ -247,17 +273,32 @@ namespace backend_.net.Migrations
                     b.ToTable("Users");
                 });
 
+            modelBuilder.Entity("final_project.Models.MealsPlan", b =>
+                {
+                    b.HasOne("final_project.Models.User", "User")
+                        .WithMany("MealPlans")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("final_project.Models.Recipe", b =>
                 {
                     b.HasOne("final_project.Models.User", "User")
                         .WithMany("Recipes")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("User");
                 });
 
             modelBuilder.Entity("final_project.Models.User", b =>
                 {
+                    b.Navigation("MealPlans");
+
                     b.Navigation("Recipes");
                 });
 #pragma warning restore 612, 618

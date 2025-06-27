@@ -8,6 +8,8 @@ public class AruchaDb : DbContext
 
     public DbSet<User> Users { get; set; }
     public DbSet<Recipe> Recipes { get; set; }
+
+    public DbSet<MealsPlan> Meals { get; set; }
     public AruchaDb(DbContextOptions<AruchaDb> options) : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -23,7 +25,7 @@ public class AruchaDb : DbContext
         });
 
         modelBuilder.Entity<Recipe>(entity => {
-            entity.HasKey(e => e.idMeal);
+            entity.HasKey(e => e.RecipeId);
             entity.Property(e => e.strMeal);
             entity.Property(e => e.strCategory);
             entity.Property(e => e.strArea);
@@ -73,8 +75,23 @@ public class AruchaDb : DbContext
             entity.Property(e => e.strMeasure20);
         });
 
+        modelBuilder.Entity<MealsPlan>(entity =>
+        {
+            entity.HasKey(e => e.MealsPlanId);
+            entity.Property(e => e.UserId);
+            entity.Property(e => e.TimeOfDay);
+            entity.Property(e => e.Date);
+            entity.Property(e => e.MealId);
+        });
+
         modelBuilder.Entity<User>()
             .HasMany(u => u.Recipes)
-            .WithOne(r => r.User);
+            .WithOne(r => r.User)
+            .HasForeignKey(r => r.UserId);
+
+        modelBuilder.Entity<User>()
+            .HasMany(m => m.MealPlans)
+            .WithOne(m => m.User)
+            .HasForeignKey(m => m.UserId);
     }
 }

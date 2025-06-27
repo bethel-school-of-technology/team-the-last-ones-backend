@@ -17,4 +17,5 @@ public class User
     public string Password { get; set; } = String.Empty;
 
     public List<Recipe> Recipes { get; set; } = new List<Recipe>();
+    public List<MealsPlan> MealPlans { get; set; } = new List<MealsPlan>();
 }

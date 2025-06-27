@@ -22,12 +22,15 @@ public class UserRepository : IUserRepository
         return _context.Users.SingleOrDefault(c => c.UserName == username);
     }
 
-    public User CreateUser(User user)
+    public User? CreateUser(User user)
     {
+        if (
+            _context.Users.Any(u => u.Email == user.Email) ||
+            _context.Users.Any(u => u.UserName == user.UserName)
+        ) { return null; }
+
         _context.Add(user);
         _context.SaveChanges();
         return user;
     }
-
-
 }
