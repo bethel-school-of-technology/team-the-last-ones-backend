@@ -26,8 +26,11 @@ public class AuthController: Controller {
 			Password = regUserDto.password
 		};
 
-		_authService.RegisterUser(user);
-		return NoContent();
+		if (_authService.RegisterUser(user) == null) {
+			return Conflict("User already exists");
+		} else {
+			return NoContent();
+		}
 	}
 
 	[HttpGet]

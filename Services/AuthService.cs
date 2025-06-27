@@ -18,12 +18,11 @@ public class AuthService: IAuthService {
         _config = config;
     }
 
-    public User RegisterUser(User user) {
+    public User? RegisterUser(User user) {
         string passwordHash = Bcrypt.HashPassword(user.Password);
         user.Password = passwordHash;
 
-        _userRepo.CreateUser(user);
-        return user;
+        return _userRepo.CreateUser(user);
     }
 
     public string Login(string email, string password) {
