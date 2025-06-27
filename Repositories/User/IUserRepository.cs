@@ -8,5 +8,5 @@ public interface IUserRepository
 
     User? GetUserByUserName(string username);
 
-    User CreateUser(User user);
+    User? CreateUser(User user);
 }
