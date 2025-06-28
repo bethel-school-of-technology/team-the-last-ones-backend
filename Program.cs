@@ -27,7 +27,7 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddCors(options => {
     options.AddPolicy("AllowAruchaApp",
         policy => policy
-                .WithOrigins("https://localhost:4200")
+                .WithOrigins("http://localhost:4200")
                 .AllowAnyHeader()
                 .AllowAnyMethod()
     );
