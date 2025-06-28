@@ -21,12 +21,20 @@ namespace final_project.Controllers
         // /api/meals/create
         [HttpPost]
         [Route("create")]
-        public ActionResult CreateMeals(MealsPlan meal)
+        public ActionResult CreateMeals(MealsPlanDto mealDto)
         {
-            if (meal == null || !ModelState.IsValid)
+            if (mealDto == null || !ModelState.IsValid)
             {
                 return BadRequest();
             }
+
+            MealsPlan meal = new MealsPlan {
+                UserId = mealDto.UserId,
+                TimeOfDay = mealDto.TimeOfDay,
+                Date = mealDto.Date,
+                MealId = mealDto.idMeal
+            };
+
             _mealsRepository.CreateMeals(meal);
             return NoContent();
         }
