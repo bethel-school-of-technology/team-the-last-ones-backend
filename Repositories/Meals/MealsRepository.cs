@@ -14,7 +14,7 @@ public class MealsRepository : IMealsRepository
 
     public MealsPlan? CreateMeals(MealsPlan meal)
     {
-        if (_context.Users.Any(u => u.UserId == meal.UserId)) {
+        if (!_context.Users.Any(u => u.UserId == meal.UserId)) {
             return null;
         }
         _context.Add(meal);

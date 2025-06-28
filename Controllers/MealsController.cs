@@ -35,8 +35,11 @@ namespace final_project.Controllers
                 MealId = mealDto.idMeal
             };
 
-            _mealsRepository.CreateMeals(meal);
-            return NoContent();
+            if (_mealsRepository.CreateMeals(meal) != null) {
+                return NoContent();
+            } else {
+                return BadRequest("The user for this meal does not exist. Bad UserId.");
+            }
         }
 
         // /api/mealsUserId
