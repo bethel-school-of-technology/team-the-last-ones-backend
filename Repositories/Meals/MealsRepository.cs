@@ -12,8 +12,11 @@ public class MealsRepository : IMealsRepository
         _context = context;
     }
 
-    public MealsPlan CreateMeals(MealsPlan meal)
+    public MealsPlan? CreateMeals(MealsPlan meal)
     {
+        if (_context.Users.Any(u => u.UserId == meal.UserId)) {
+            return null;
+        }
         _context.Add(meal);
         _context.SaveChanges();
         return meal;
