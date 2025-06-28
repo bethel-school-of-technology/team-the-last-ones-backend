@@ -24,13 +24,15 @@ public class UserRepository : IUserRepository
 
     public User? CreateUser(User user)
     {
-        if (
-            _context.Users.Any(u => u.Email == user.Email) ||
-            _context.Users.Any(u => u.UserName == user.UserName)
-        ) { return null; }
+        if (!UserInDatabase(user)) {
+            _context.Add(user);
+            _context.SaveChanges();
+            return user;
+        }
+        return null;
+    }
 
-        _context.Add(user);
-        _context.SaveChanges();
-        return user;
+    private bool UserInDatabase(User user) {
+        return _context.Users.Any(u => u.Email == user.Email) || _context.Users.Any(u => u.UserName == user.UserName);
     }
 }

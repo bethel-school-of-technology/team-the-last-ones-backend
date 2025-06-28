@@ -30,27 +30,5 @@ namespace final_project.Controllers
             }
             return Ok(user);
         }
-
-        // /api/User/register
-        [HttpPost]
-        [Route("register")]
-        public ActionResult CreateUser(User user)
-        {
-            if (user == null || !ModelState.IsValid)
-            {
-                return BadRequest();
-            }
-
-            if (
-                _userRepository.GetUserByEmail(user.Email) != null ||
-                _userRepository.GetUserByUserName(user.UserName) != null
-                )
-            {
-                return BadRequest("User already exists");
-            }
-
-            _userRepository.CreateUser(user);
-            return NoContent();
-        }
     }
 }
