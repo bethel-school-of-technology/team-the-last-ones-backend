@@ -23,6 +23,7 @@ builder.Services.AddSwaggerGen();
 
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IMealsRepository, MealsRepository>();
 
 builder.Services.AddCors(options => {
     options.AddPolicy("AllowAruchaApp",
