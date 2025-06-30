@@ -29,6 +29,7 @@ namespace final_project.Controllers
             }
 
             MealsPlan meal = new MealsPlan {
+                MealsPlanId = mealDto.MealsPlanId,
                 UserId = mealDto.UserId,
                 TimeOfDay = mealDto.TimeOfDay,
                 Date = mealDto.Date,
