@@ -46,7 +46,7 @@ namespace final_project.Controllers
         // /api/mealsUserId
         [HttpGet]
         [Route("{UserId}")]
-        public ActionResult<IEnumerable<MealsPlan>> GetMealsByUserId(int userId)
+        public ActionResult<IEnumerable<MealsPlanDto>> GetMealsByUserId(int userId)
         {
             return Ok(_mealsRepository.GetMealsByUserId(userId));
         }
@@ -54,7 +54,7 @@ namespace final_project.Controllers
         // /api/meals/MealId
         [HttpGet]
         [Route("mealId{MealId}")]
-        public ActionResult<MealsPlan> GetMealById(int MealId)
+        public ActionResult<MealsPlanDto> GetMealById(int MealId)
         {
             var meal = _mealsRepository.GetMealsByUserId(MealId);
             if (meal == null)
@@ -68,7 +68,7 @@ namespace final_project.Controllers
         // /api/meals/update
         [HttpPut]
         [Route("update:int")]
-        public ActionResult<MealsPlan> UpdateMeal(MealsPlan meal)
+        public ActionResult<MealsPlanDto> UpdateMeal(MealsPlan meal)
         {
             if (!ModelState.IsValid || meal == null)
             {
