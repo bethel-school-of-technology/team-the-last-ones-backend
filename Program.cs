@@ -1,9 +1,15 @@
+using System.Diagnostics;
+using System.Text;
 using final_project.Migrations;
 using final_project.Repositories;
 using final_project.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.OpenApi;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Protocols.Configuration;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +22,25 @@ builder.Services.AddControllers();
 string connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Unable to load connection string");
 builder.Services.AddDbContext<AruchaDb>(options => {
     options.UseSqlite(connectionString);
+});
+
+string key = builder.Configuration.GetValue<String>("TokenSecret") ?? throw new InvalidConfigurationException("Failed to get secret");
+
+builder.Services.AddAuthentication(options => {
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+}).AddJwtBearer(cfg => {
+    cfg.RequireHttpsMetadata = true;
+    cfg.SaveToken = true;
+    cfg.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters() {
+        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
+        ValidateAudience = false,
+        ValidateIssuer = false,
+        ValidateLifetime = false,
+        RequireExpirationTime = true,
+        ClockSkew = TimeSpan.Zero,
+        ValidateIssuerSigningKey = true
+    };
 });
 
 builder.Services.AddEndpointsApiExplorer();
