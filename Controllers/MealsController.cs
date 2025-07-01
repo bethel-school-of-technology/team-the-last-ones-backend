@@ -21,7 +21,7 @@ namespace final_project.Controllers
         // /api/meals/create
         [HttpPost]
         [Route("create")]
-        public ActionResult CreateMeals(MealsPlanDtoRx mealDto)
+        public ActionResult CreateMeals(MealsPlanDto mealDto)
         {
             if (mealDto == null || !ModelState.IsValid)
             {
