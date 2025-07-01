@@ -44,7 +44,7 @@ namespace final_project.Controllers
 
         // /api/mealsUserId
         [HttpGet]
-        [Route("{UserId}")]
+        [Route("{userId:int}")]
         public ActionResult<IEnumerable<MealsPlanDtoTx>> GetMealsByUserId(int userId)
         {
             return Ok(_mealsRepository.GetMealsByUserId(userId));
@@ -52,7 +52,7 @@ namespace final_project.Controllers
 
         // /api/meals/MealId
         [HttpGet]
-        [Route("mealId{MealId}")]
+        [Route("mealId{MealId:int}")]
         public ActionResult<MealsPlanDtoTx> GetMealById(int MealId)
         {
             var meal = _mealsRepository.GetMealsByUserId(MealId);
@@ -66,7 +66,7 @@ namespace final_project.Controllers
 
         // /api/meals/update
         [HttpPut]
-        [Route("update:int")]
+        [Route("{update:int}")]
         public ActionResult<MealsPlanDtoRx> UpdateMeal(MealsPlan meal)
         {
             if (!ModelState.IsValid || meal == null)
@@ -78,7 +78,7 @@ namespace final_project.Controllers
 
         // /api/meals/delete
         [HttpDelete]
-        [Route("delete{mealsPlanId}")]
+        [Route("delete{mealsPlanId:int}")]
         public ActionResult DeleteMeal(int mealPlanId)
         {
             _mealsRepository.DeleteMealByMealPlanId(mealPlanId);
