@@ -55,7 +55,7 @@ namespace final_project.Controllers
         [Route("mealId{MealId:int}")]
         public ActionResult<MealsPlanResponseDto> GetMealById(int MealId)
         {
-            var meal = _mealsRepository.GetMealsByUserId(MealId);
+            var meal = _mealsRepository.GetMealById(MealId);
             if (meal == null)
             {
                 return NotFound();
@@ -98,7 +98,7 @@ namespace final_project.Controllers
 
         // /api/meals/delete
         [HttpDelete]
-        [Route("delete{mealsPlanId:int}")]
+        [Route("delete{mealPlanId:int}")]
         public ActionResult DeleteMeal(int mealPlanId)
         {
             _mealsRepository.DeleteMealByMealPlanId(mealPlanId);
