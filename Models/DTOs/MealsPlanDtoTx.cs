@@ -1,6 +1,6 @@
 namespace final_project.Models;
 
-public class MealsPlanDto{
+public class MealsPlanDtoTx{
     public int MealsPlanId { get; set; }
     public int UserId { get; set; }
     public string TimeOfDay { get; set; } = String.Empty; // Breakfast, Lunch, or Dinner

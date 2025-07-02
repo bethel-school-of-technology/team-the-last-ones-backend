@@ -21,7 +21,7 @@ namespace final_project.Controllers
         // /api/meals/create
         [HttpPost]
         [Route("create")]
-        public ActionResult CreateMeals(MealsPlanDto mealDto)
+        public ActionResult CreateMeals(MealsPlanDtoRx mealDto)
         {
             if (mealDto == null || !ModelState.IsValid)
             {
@@ -29,7 +29,6 @@ namespace final_project.Controllers
             }
 
             MealsPlan meal = new MealsPlan {
-                MealsPlanId = mealDto.MealsPlanId,
                 UserId = mealDto.UserId,
                 TimeOfDay = mealDto.TimeOfDay,
                 Date = mealDto.Date,
@@ -45,16 +44,16 @@ namespace final_project.Controllers
 
         // /api/mealsUserId
         [HttpGet]
-        [Route("{UserId}")]
-        public ActionResult<IEnumerable<MealsPlanDto>> GetMealsByUserId(int userId)
+        [Route("{userId:int}")]
+        public ActionResult<IEnumerable<MealsPlanDtoTx>> GetMealsByUserId(int userId)
         {
             return Ok(_mealsRepository.GetMealsByUserId(userId));
         }
 
         // /api/meals/MealId
         [HttpGet]
-        [Route("mealId{MealId}")]
-        public ActionResult<MealsPlanDto> GetMealById(int MealId)
+        [Route("mealId{MealId:int}")]
+        public ActionResult<MealsPlanDtoTx> GetMealById(int MealId)
         {
             var meal = _mealsRepository.GetMealsByUserId(MealId);
             if (meal == null)
@@ -67,8 +66,8 @@ namespace final_project.Controllers
 
         // /api/meals/update
         [HttpPut]
-        [Route("update:int")]
-        public ActionResult<MealsPlanDto> UpdateMeal(MealsPlan meal)
+        [Route("{update:int}")]
+        public ActionResult<MealsPlanDtoRx> UpdateMeal(MealsPlan meal)
         {
             if (!ModelState.IsValid || meal == null)
             {
@@ -79,7 +78,7 @@ namespace final_project.Controllers
 
         // /api/meals/delete
         [HttpDelete]
-        [Route("delete{mealsPlanId}")]
+        [Route("delete{mealsPlanId:int}")]
         public ActionResult DeleteMeal(int mealPlanId)
         {
             _mealsRepository.DeleteMealByMealPlanId(mealPlanId);
