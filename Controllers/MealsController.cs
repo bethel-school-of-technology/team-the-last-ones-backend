@@ -79,7 +79,6 @@ namespace final_project.Controllers
                 return NotFound();
             }
 
-            originalMeal.UserId = updateMealDto.UserId;
             originalMeal.TimeOfDay = updateMealDto.TimeOfDay;
             originalMeal.MealId = updateMealDto.idMeal;
 
