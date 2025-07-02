@@ -98,10 +98,10 @@ namespace final_project.Controllers
 
         // /api/meals/delete
         [HttpDelete]
-        [Route("delete{mealPlanId:int}")]
-        public ActionResult DeleteMeal(int mealPlanId)
+        [Route("delete{mealsPlanId:int}")]
+        public ActionResult DeleteMeal(int mealsPlanId)
         {
-            _mealsRepository.DeleteMealByMealPlanId(mealPlanId);
+            _mealsRepository.DeleteMealByMealPlanId(mealsPlanId);
             return NoContent();
         }
     }
