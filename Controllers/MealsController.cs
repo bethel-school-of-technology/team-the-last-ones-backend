@@ -1,7 +1,7 @@
 using final_project.Models;
 using final_project.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace final_project.Controllers
 {
@@ -19,6 +19,7 @@ namespace final_project.Controllers
         }
 
         // /api/meals/create
+        [Authorize]
         [HttpPost]
         [Route("create")]
         public ActionResult CreateMeals(MealsPlanCreateDto mealDto)
@@ -43,6 +44,7 @@ namespace final_project.Controllers
         }
 
         // /api/mealsUserId
+        [Authorize]
         [HttpGet]
         [Route("{userId:int}")]
         public ActionResult<IEnumerable<MealsPlanResponseDto>> GetMealsByUserId(int userId)
@@ -51,6 +53,7 @@ namespace final_project.Controllers
         }
 
         // /api/meals/MealId
+        [Authorize]
         [HttpGet]
         [Route("mealId{MealId:int}")]
         public ActionResult<MealsPlanResponseDto> GetMealById(int MealId)
@@ -65,6 +68,7 @@ namespace final_project.Controllers
         }
 
         // /api/meals/update
+        [Authorize]
         [HttpPut]
         [Route("update")]
         public ActionResult<MealsPlanResponseDto> UpdateMeal(MealsPlanUpdateDto updateMealDto)
@@ -96,6 +100,7 @@ namespace final_project.Controllers
         }
 
         // /api/meals/delete
+        [Authorize]
         [HttpDelete]
         [Route("delete{mealsPlanId:int}")]
         public ActionResult DeleteMeal(int mealsPlanId)
