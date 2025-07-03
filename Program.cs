@@ -89,6 +89,8 @@ app.UseCors("AllowAruchaApp");
 
 app.UseHttpsRedirection();
 
+app.UseAuthorization();
+
 app.MapControllers();
 
 app.Run();
