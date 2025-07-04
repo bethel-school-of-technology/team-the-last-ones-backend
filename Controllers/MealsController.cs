@@ -49,7 +49,17 @@ namespace final_project.Controllers
         [Route("{userId:int}")]
         public ActionResult<IEnumerable<MealsPlanResponseDto>> GetMealsByUserId(int userId)
         {
-            return Ok(_mealsRepository.GetMealsByUserId(userId));
+            var userMealPlans = _mealsRepository.GetMealsByUserId(userId);
+
+            var userMealDtos = userMealPlans.Select(m => new MealsPlanResponseDto {
+                MealsPlanId = m.MealsPlanId,
+                UserId = m.UserId,
+                TimeOfDay = m.TimeOfDay,
+                Date = m.Date,
+                idMeal = m.MealId
+            });
+
+            return Ok(userMealDtos);
         }
 
         // /api/meals/MealId
