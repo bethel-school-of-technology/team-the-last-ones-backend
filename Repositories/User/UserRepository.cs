@@ -38,13 +38,13 @@ public class UserRepository : IUserRepository
         return _context.Users.Any(u => u.Email == user.Email) || _context.Users.Any(u => u.UserName == user.UserName);
     }
 
-    public User? UpdateUser(User user)
+    public User? UpdateUser(UpdateUserDto user)
     {
         var orUser = _context.Users.Find(user.UserId);
         if (orUser != null)
         {
             orUser.Email = user.Email;
-            orUser.UserName = user.Password;
+            orUser.UserName = user.UserName;
             _context.SaveChanges();
         }
         return orUser;

@@ -10,5 +10,5 @@ public interface IUserRepository
 
     User? CreateUser(User user);
 
-    User? UpdateUser(User user);
+    User? UpdateUser(UpdateUserDto user);
 }

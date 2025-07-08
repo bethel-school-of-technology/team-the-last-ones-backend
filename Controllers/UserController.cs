@@ -32,8 +32,8 @@ namespace final_project.Controllers
         }
 
         [HttpPut]
-        [Route("UserId:int")]
-        public ActionResult UpdateUser(User user)
+        [Route("{UserId:int}")]
+        public ActionResult UpdateUser(UpdateUserDto user)
         {
             if (!ModelState.IsValid || user == null)
             {
