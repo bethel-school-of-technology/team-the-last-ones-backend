@@ -1,7 +1,7 @@
 using final_project.Models;
 using final_project.Repositories;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace final_project.Controllers
 {
@@ -19,9 +19,10 @@ namespace final_project.Controllers
         }
 
         // /api/meals/create
+        [Authorize]
         [HttpPost]
         [Route("create")]
-        public ActionResult CreateMeals(MealsPlanDtoRx mealDto)
+        public ActionResult CreateMeals(MealsPlanCreateDto mealDto)
         {
             if (mealDto == null || !ModelState.IsValid)
             {
@@ -43,17 +44,29 @@ namespace final_project.Controllers
         }
 
         // /api/mealsUserId
+        [Authorize]
         [HttpGet]
         [Route("{userId:int}")]
-        public ActionResult<IEnumerable<MealsPlanDtoTx>> GetMealsByUserId(int userId)
+        public ActionResult<IEnumerable<MealsPlanResponseDto>> GetMealsByUserId(int userId)
         {
-            return Ok(_mealsRepository.GetMealsByUserId(userId));
+            var userMealPlans = _mealsRepository.GetMealsByUserId(userId);
+
+            var userMealDtos = userMealPlans.Select(m => new MealsPlanResponseDto {
+                MealsPlanId = m.MealsPlanId,
+                UserId = m.UserId,
+                TimeOfDay = m.TimeOfDay,
+                Date = m.Date,
+                idMeal = m.MealId
+            });
+
+            return Ok(userMealDtos);
         }
 
         // /api/meals/MealId
+        [Authorize]
         [HttpGet]
         [Route("mealId{MealId:int}")]
-        public ActionResult<MealsPlanDtoTx> GetMealById(int MealId)
+        public ActionResult<MealsPlanResponseDto> GetMealById(int MealId)
         {
             var meal = _mealsRepository.GetMealById(MealId);
             if (meal == null)
@@ -65,23 +78,44 @@ namespace final_project.Controllers
         }
 
         // /api/meals/update
+        [Authorize]
         [HttpPut]
-        [Route("{update:int}")]
-        public ActionResult<MealsPlanDtoRx> UpdateMeal(MealsPlan meal)
+        [Route("update")]
+        public ActionResult<MealsPlanResponseDto> UpdateMeal(MealsPlanUpdateDto updateMealDto)
         {
-            if (!ModelState.IsValid || meal == null)
+            if (!ModelState.IsValid || updateMealDto == null)
             {
                 return BadRequest();
             }
-            return Ok(_mealsRepository.UpdateMeal(meal));
+
+            MealsPlan? originalMeal = _mealsRepository.GetMealById(updateMealDto.MealsPlanId);
+            if (originalMeal == null) {
+                return NotFound();
+            }
+
+            originalMeal.TimeOfDay = updateMealDto.TimeOfDay;
+            originalMeal.MealId = updateMealDto.idMeal;
+
+            _mealsRepository.UpdateMeal(originalMeal);
+
+            MealsPlanResponseDto returnMeal = new MealsPlanResponseDto {
+                MealsPlanId = originalMeal.MealsPlanId,
+                UserId = originalMeal.UserId,
+                TimeOfDay = originalMeal.TimeOfDay,
+                Date = originalMeal.Date,
+                idMeal = originalMeal.MealId
+            };
+
+            return Ok(returnMeal);
         }
 
         // /api/meals/delete
+        [Authorize]
         [HttpDelete]
-        [Route("delete{mealPlanId:int}")]
-        public ActionResult DeleteMeal(int mealPlanId)
+        [Route("delete{mealsPlanId:int}")]
+        public ActionResult DeleteMeal(int mealsPlanId)
         {
-            _mealsRepository.DeleteMealByMealPlanId(mealPlanId);
+            _mealsRepository.DeleteMealByMealPlanId(mealsPlanId);
             return NoContent();
         }
     }
