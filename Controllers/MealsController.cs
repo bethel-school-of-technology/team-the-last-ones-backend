@@ -32,7 +32,7 @@ namespace final_project.Controllers
                 UserId = mealDto.UserId,
                 TimeOfDay = mealDto.TimeOfDay,
                 Date = mealDto.Date,
-                MealId = mealDto.idMeal
+                MealId = mealDto.IdMeal
             };
 
             if (_mealsRepository.CreateMeals(meal) != null) {
