@@ -9,4 +9,6 @@ public interface IUserRepository
     User? GetUserByUserName(string username);
 
     User? CreateUser(User user);
+
+    User? UpdateUser(User user);
 }
