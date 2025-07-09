@@ -7,4 +7,7 @@ public class MealsPlan{
     public string TimeOfDay { get; set; } = String.Empty;
     public DateTime Date { get; set; }
     public int MealId { get; set; }
+
+    public string Thumb { get; set; }
+    public string MealName { get; set; }
 }

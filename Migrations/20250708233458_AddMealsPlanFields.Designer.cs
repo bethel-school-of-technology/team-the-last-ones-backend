@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using final_project.Migrations;
 
@@ -10,9 +11,11 @@ using final_project.Migrations;
 namespace backend_.net.Migrations
 {
     [DbContext(typeof(AruchaDb))]
-    partial class AruchaDbModelSnapshot : ModelSnapshot
+    [Migration("20250708233458_AddMealsPlanFields")]
+    partial class AddMealsPlanFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.0");

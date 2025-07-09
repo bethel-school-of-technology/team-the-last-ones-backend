@@ -33,7 +33,9 @@ namespace final_project.Controllers
                 UserId = mealDto.UserId,
                 TimeOfDay = mealDto.TimeOfDay,
                 Date = mealDto.Date,
-                MealId = mealDto.idMeal
+                MealId = mealDto.idMeal,
+                Thumb = mealDto.Thumb,
+                MealName = mealDto.MealName
             };
 
             if (_mealsRepository.CreateMeals(meal) != null) {
