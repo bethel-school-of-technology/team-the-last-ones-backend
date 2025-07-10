@@ -58,7 +58,9 @@ namespace final_project.Controllers
                 UserId = m.UserId,
                 TimeOfDay = m.TimeOfDay,
                 Date = m.Date,
-                idMeal = m.MealId
+                idMeal = m.MealId,
+                Thumb = m.Thumb,
+                MealName = m.MealName
             });
 
             return Ok(userMealDtos);
