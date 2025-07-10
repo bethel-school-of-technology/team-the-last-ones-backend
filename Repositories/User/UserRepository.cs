@@ -24,7 +24,8 @@ public class UserRepository : IUserRepository
 
     public User? CreateUser(User user)
     {
-        if (!UserInDatabase(user)) {
+        if (!UserInDatabase(user))
+        {
             _context.Add(user);
             _context.SaveChanges();
             return user;
@@ -32,7 +33,20 @@ public class UserRepository : IUserRepository
         return null;
     }
 
-    private bool UserInDatabase(User user) {
+    private bool UserInDatabase(User user)
+    {
         return _context.Users.Any(u => u.Email == user.Email) || _context.Users.Any(u => u.UserName == user.UserName);
+    }
+
+    public User? UpdateUser(UpdateUserDto user)
+    {
+        var orUser = _context.Users.Find(user.UserId);
+        if (orUser != null)
+        {
+            orUser.Email = user.Email;
+            orUser.UserName = user.UserName;
+            _context.SaveChanges();
+        }
+        return orUser;
     }
 }
