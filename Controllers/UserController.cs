@@ -30,5 +30,16 @@ namespace final_project.Controllers
             }
             return Ok(user);
         }
+
+        [HttpPut]
+        [Route("{UserId:int}")]
+        public ActionResult UpdateUser(UpdateUserDto user)
+        {
+            if (!ModelState.IsValid || user == null)
+            {
+                return BadRequest();
+            }
+            return Ok(_userRepository.UpdateUser(user));
+        }
     }
 }
