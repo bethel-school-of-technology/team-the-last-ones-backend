@@ -82,6 +82,8 @@ public class AruchaDb : DbContext
             entity.Property(e => e.TimeOfDay);
             entity.Property(e => e.Date);
             entity.Property(e => e.MealId);
+            entity.Property(e => e.Thumb);
+            entity.Property(e => e.MealName);
         });
 
         modelBuilder.Entity<User>()
