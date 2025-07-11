@@ -17,6 +17,11 @@ public class UserRepository : IUserRepository
         return _context.Users.SingleOrDefault(c => c.Email == email);
     }
 
+    public User? GetUserByUserId(int userId)
+    {
+        return _context.Users.SingleOrDefault(c => c.UserId == userId);
+    }
+
     public User? GetUserByUserName(string username)
     {
         return _context.Users.SingleOrDefault(c => c.UserName == username);
@@ -48,5 +53,15 @@ public class UserRepository : IUserRepository
             _context.SaveChanges();
         }
         return orUser;
+    }
+
+    public void DeleteUserById(int userId)
+    {
+        var user = _context.Users.Find(userId);
+        if (user != null)
+        {
+            _context.Users.Remove(user);
+            _context.SaveChanges();
+        }
     }
 }

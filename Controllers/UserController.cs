@@ -31,6 +31,18 @@ namespace final_project.Controllers
             return Ok(user);
         }
 
+        [HttpGet]
+        [Route("userId{userId:int}")]
+        public ActionResult<UpdateUserDto> GetUserByUserId(int userId)
+        {
+            var user = _userRepository.GetUserByUserId(userId);
+            if (user == null)
+            {
+                return NotFound();
+            }
+            return Ok(user);
+        }
+
         [HttpPut]
         [Route("{UserId:int}")]
         public ActionResult UpdateUser(UpdateUserDto user)
@@ -40,6 +52,14 @@ namespace final_project.Controllers
                 return BadRequest();
             }
             return Ok(_userRepository.UpdateUser(user));
+        }
+
+        [HttpDelete]
+        [Route("delete{userId:int}")]
+        public ActionResult DeleteUserById(int userId)
+        {
+            _userRepository.DeleteUserById(userId);
+            return NoContent();
         }
     }
 }
